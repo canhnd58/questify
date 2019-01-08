@@ -9027,6 +9027,11 @@ ripemd160@^2.0.0, ripemd160@^2.0.1:
     hash-base "^3.0.0"
     inherits "^2.0.1"
 
+roughjs@^2.2.5:
+  version "2.2.5"
+  resolved "https://registry.npmjs.org/roughjs/-/roughjs-2.2.5.tgz#1ca03432e7e620a165865950a3033ce5f87eb250"
+  integrity sha512-OHNG2wHIaPDVgKIehFMyiiC+xPjy+yEBxsDkTIDoosXtEkzckdPuXuK3Z8nSmZtPwF+LaTMlExsOcfIN+aql/A==
+
 rsvp@^3.3.3:
   version "3.6.2"
   resolved "https://registry.yarnpkg.com/rsvp/-/rsvp-3.6.2.tgz#2e96491599a96cde1b515d5674a8f7a91452926a"
