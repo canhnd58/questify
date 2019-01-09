@@ -89,4 +89,40 @@ const Circle = ({x, y, diameter, ...props}) => (
   <RoughComponent roughProps={[x, y, diameter]} type="circle" {...props} />
 );
 
-export {Canvas, SVG, Line, Rectangle, Ellipse, Circle};
+const LinearPath = ({points, ...props}) => (
+  <RoughComponent roughProps={[points]} type="linearPath" {...props} />
+);
+
+const Polygon = ({vertices, ...props}) => (
+  <RoughComponent roughProps={[vertices]} type="polygon" {...props} />
+);
+
+const Arc = ({x, y, width, height, start, stop, closed, ...props}) => (
+  <RoughComponent
+    roughProps={[x, y, width, height, start, stop, closed]}
+    type="arc"
+    {...props}
+  />
+);
+
+const Curve = ({points, ...props}) => (
+  <RoughComponent roughProps={[points]} type="curve" {...props} />
+);
+
+const Path = ({d, ...props}) => (
+  <RoughComponent roughProps={[d]} type="path" {...props} />
+);
+
+export {
+  Canvas,
+  SVG,
+  Line,
+  Rectangle,
+  Ellipse,
+  Circle,
+  LinearPath,
+  Polygon,
+  Arc,
+  Curve,
+  Path,
+};
