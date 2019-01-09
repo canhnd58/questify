@@ -17,7 +17,7 @@ class RoughWrapper extends React.Component {
   }
 
   render() {
-    const {width, height, type, children} = this.props;
+    const {type, children, ...others} = this.props;
     const {roughInstance} = this.state;
     const Component = type;
     const roughCallback =
@@ -25,12 +25,11 @@ class RoughWrapper extends React.Component {
 
     return (
       <>
-        <Component width={width} height={height} ref={this.domRef} />
+        <Component ref={this.domRef} {...others} />
         {React.Children.map(children, child =>
           React.cloneElement(
             child,
             {
-              test: 'abc',
               roughInstance,
               roughCallback,
             },
