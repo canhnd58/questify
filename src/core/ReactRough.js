@@ -24,8 +24,7 @@ class RoughWrapper extends React.Component {
       type === 'svg' ? node => this.domRef.current.appendChild(node) : () => {};
 
     return (
-      <>
-        <Component ref={this.domRef} {...others} />
+      <Component ref={this.domRef} {...others} >
         {React.Children.map(children, child =>
           React.cloneElement(
             child,
@@ -33,10 +32,10 @@ class RoughWrapper extends React.Component {
               roughInstance,
               roughCallback,
             },
-            null,
+            child.props.children == null ? null : [...child.props.children],
           ),
         )}
-      </>
+      </Component>
     );
   }
 }
@@ -58,6 +57,37 @@ class RoughComponent extends React.Component {
 
   render() {
     return null;
+  }
+}
+
+class Text extends React.Component {
+  constructor(props) {
+    super(props);
+    this.domRef = React.createRef();
+  }
+
+  componentDidUpdate() {
+    const {
+      roughInstance,
+      roughCallback,
+    } = this.props;
+    if (!roughInstance) return;
+    roughCallback(this.domRef.current);
+  }
+
+  render() {
+    const {
+      roughCallback,
+      roughInstance,
+      children,
+      ...props
+    } = this.props;
+
+    return (
+      <text ref={this.domRef} {...props}>
+        {children}
+      </text>
+    );
   }
 }
 
@@ -116,6 +146,7 @@ const Path = ({d, ...props}) => (
 export {
   Canvas,
   SVG,
+  Text,
   Line,
   Rectangle,
   Ellipse,
