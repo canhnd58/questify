@@ -27,6 +27,9 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "react-styleguidist": "^8.0.6"
+    "enzyme": "^3.8.0",
+    "enzyme-adapter-react-16": "^1.7.1",
+    "react-styleguidist": "^8.0.6",
+    "react-test-renderer": "^16.7.0"
   }
 }
