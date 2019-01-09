@@ -65,8 +65,8 @@ const Canvas = props => <RoughWrapper {...props} type="canvas" />;
 
 const SVG = props => <RoughWrapper {...props} type="svg" />;
 
-const Line = ({x1, y1, x2, y2, options}) => (
-  <RoughComponent roughProps={[x1, y1, x2, y2]} type="line" options={options} />
+const Line = ({x1, y1, x2, y2, ...props}) => (
+  <RoughComponent roughProps={[x1, y1, x2, y2]} type="line" {...props} />
 );
 
 const Rectangle = ({x, y, width, height, ...props}) => (
