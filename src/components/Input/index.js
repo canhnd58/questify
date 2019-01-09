@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import {SVG, Rectangle} from '../../core/ReactRough';
+import {SVG, Path} from '../../core/ReactRough';
 
 const InputWrapper = styled.div`
   display: inline-block;
@@ -26,14 +26,16 @@ const Input = props => (
   <InputWrapper>
     <ClearedStyleInput {...props} />
     <SVG
-      width="100%"
-      height="100%"
+      viewBox="0 0 659 522"
+      preserveAspectRatio="none"
       style={{
         position: 'absolute',
         left: 0,
         top: 0,
+        width: '100%',
+        height: '100%',
       }}>
-      <Rectangle x={5} y={5} width={100} height={70} options={{}} />
+      <Path width="98%" height="98%" d="M654,5v512H5V5H654z" />
     </SVG>
   </InputWrapper>
 );
