@@ -1,35 +1,74 @@
 import React from 'react';
+import styled from 'styled-components';
 import {SVG, Text, Rectangle} from '../../core/ReactRough';
 
+const ButtonText = styled(Text)`
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
+  text-anchor: middle;
+  alignment-baseline: central;
+`
+
+const ButtonSVG = styled(SVG)`
+  cursor: pointer;
+  &:hover {
+    transform: translate(0, -2px);
+  }
+  &:active {
+    transform: translate(0, 0);
+  }
+`
+
 class Button extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      width: 0,
+      height: 0,
+    }
+  }
+
+  componentDidMount() {
+    const {width, height} = this.textRef.getBBox();
+    const padding_x = 30;
+    const padding_y = 20;
+    this.setState({
+      width: width + padding_x,
+      height: height + padding_y
+    });
+  }
+
   render() {
-    const WIDTH = 80;
-    const HEIGHT = 40;
-    const PADDING = 3;
+    const {width, height} = this.state;
     const {children, color} = this.props;
+    const padding = 3;
 
     return (
-      <SVG width={WIDTH} height={HEIGHT} style={{cursor: 'pointer'}}>
+      <ButtonSVG width={width} height={height}>
         <Rectangle
-          x={PADDING}
-          y={PADDING}
-          width={WIDTH-2*PADDING}
-          height={HEIGHT-2*PADDING}
+          x={padding}
+          y={padding}
+          width={width - 2 * padding}
+          height={height - 2 * padding}
           options={{
             fill: color,
             fillWeight: 3,
           }}
         />
-        <Text
-          x={WIDTH/2}
-          y={HEIGHT/2}
-          textAnchor={'middle'}
-          alignmentBaseline={'central'}
+        <ButtonText
+          ref={e => this.textRef = e}
+          x={width / 2}
+          y={height / 2}
         >
           {children}
-        </Text>
+        </ButtonText>
 
-      </SVG>
+      </ButtonSVG>
     );
   }
 }

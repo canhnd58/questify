@@ -32,7 +32,7 @@ class RoughWrapper extends React.Component {
               roughInstance,
               roughCallback,
             },
-            child.props.children == null ? null : [...child.props.children],
+            child.props.children,
           ),
         )}
       </Component>
@@ -73,6 +73,10 @@ class Text extends React.Component {
     } = this.props;
     if (!roughInstance) return;
     roughCallback(this.domRef.current);
+  }
+
+  getBBox() {
+    return this.domRef.current.getBBox();
   }
 
   render() {
