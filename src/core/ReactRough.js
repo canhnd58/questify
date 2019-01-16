@@ -24,7 +24,7 @@ class RoughWrapper extends React.Component {
       type === 'svg' ? node => this.domRef.current.appendChild(node) : () => {};
 
     return (
-      <Component ref={this.domRef} {...others} >
+      <Component ref={this.domRef} {...others}>
         {React.Children.map(children, child =>
           React.cloneElement(
             child,
@@ -41,7 +41,7 @@ class RoughWrapper extends React.Component {
 }
 
 class RoughComponent extends React.Component {
-  componentDidUpdate() {
+  componentDidUpdate(prevProps) {
     const {
       roughInstance,
       roughCallback,
@@ -50,7 +50,7 @@ class RoughComponent extends React.Component {
       options,
     } = this.props;
 
-    if (!roughInstance) return;
+    if (!roughInstance || prevProps.roughInstance) return;
     const node = roughInstance[type](...roughProps, options);
     roughCallback(node);
   }
@@ -67,10 +67,7 @@ class Text extends React.Component {
   }
 
   componentDidUpdate() {
-    const {
-      roughInstance,
-      roughCallback,
-    } = this.props;
+    const {roughInstance, roughCallback} = this.props;
     if (!roughInstance) return;
     roughCallback(this.domRef.current);
   }
@@ -80,12 +77,7 @@ class Text extends React.Component {
   }
 
   render() {
-    const {
-      roughCallback,
-      roughInstance,
-      children,
-      ...props
-    } = this.props;
+    const {roughCallback, roughInstance, children, ...props} = this.props;
 
     return (
       <text ref={this.domRef} {...props}>
