@@ -19,6 +19,7 @@ const ClearedStyleInput = styled.input`
   left: 5%;
   height: 75%;
   top: 12.5%;
+  font-size: 1em;
 `;
 
 const Input = props => (

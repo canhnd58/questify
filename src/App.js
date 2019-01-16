@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Button from './components/Button';
+import Input from './components/Input';
 
 class App extends Component {
   render() {
@@ -10,6 +11,7 @@ class App extends Component {
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <Button>Test</Button>
+          <Input />
           <p>
             Edit <code>src/App.js</code> and save to reload.
           </p>
