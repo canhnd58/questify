@@ -21,7 +21,12 @@ class RoughWrapper extends React.Component {
     const {roughInstance} = this.state;
     const Component = type;
     const roughCallback =
-      type === 'svg' ? node => this.domRef.current.appendChild(node) : () => {};
+      type === 'svg' ? (node, oldNode) => {
+        if (!oldNode)
+          this.domRef.current.appendChild(node);
+        else
+          this.domRef.current.replaceChild(node, oldNode);
+      } : () => {};
 
     return (
       <Component ref={this.domRef} {...others}>
@@ -41,7 +46,12 @@ class RoughWrapper extends React.Component {
 }
 
 class RoughComponent extends React.Component {
-  componentDidUpdate(prevProps) {
+  constructor(props) {
+    super(props);
+    this.ref = null;
+  }
+
+  componentDidUpdate() {
     const {
       roughInstance,
       roughCallback,
@@ -50,9 +60,10 @@ class RoughComponent extends React.Component {
       options,
     } = this.props;
 
-    if (!roughInstance || prevProps.roughInstance) return;
+    if (!roughInstance) return;
     const node = roughInstance[type](...roughProps, options);
-    roughCallback(node);
+    roughCallback(node, this.ref);
+    this.ref = node;
   }
 
   render() {
