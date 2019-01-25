@@ -21,24 +21,28 @@ class RoughWrapper extends React.Component {
     const {roughInstance} = this.state;
     const Component = type;
     const roughCallback =
-      type === 'svg' ? (node, oldNode) => {
-        if (!oldNode)
-          this.domRef.current.appendChild(node);
-        else
-          this.domRef.current.replaceChild(node, oldNode);
-      } : () => {};
+      type === 'svg'
+        ? (node, oldNode) => {
+            if (!oldNode) this.domRef.current.appendChild(node);
+            else this.domRef.current.replaceChild(node, oldNode);
+          }
+        : () => {};
+    const releaseDom =
+      type === 'svg'
+        ? node => this.domRef.current && this.domRef.current.removeChild(node)
+        : () => {};
 
     return (
       <Component ref={this.domRef} {...others}>
-        {React.Children.map(children, child =>
-          React.cloneElement(
-            child,
-            {
+        {React.Children.map(
+          children,
+          child =>
+            child &&
+            React.cloneElement(child, {
               roughInstance,
               roughCallback,
-            },
-            child.props.children,
-          ),
+              releaseDom,
+            }),
         )}
       </Component>
     );
@@ -51,7 +55,11 @@ class RoughComponent extends React.Component {
     this.ref = null;
   }
 
-  componentDidUpdate() {
+  componentWillUnmount() {
+    this.props.releaseDom(this.ref);
+  }
+
+  render() {
     const {
       roughInstance,
       roughCallback,
@@ -60,13 +68,11 @@ class RoughComponent extends React.Component {
       options,
     } = this.props;
 
-    if (!roughInstance) return;
+    if (!roughInstance) return null;
     const node = roughInstance[type](...roughProps, options);
     roughCallback(node, this.ref);
     this.ref = node;
-  }
 
-  render() {
     return null;
   }
 }
@@ -88,7 +94,13 @@ class Text extends React.Component {
   }
 
   render() {
-    const {roughCallback, roughInstance, children, ...props} = this.props;
+    const {
+      roughCallback,
+      roughInstance,
+      releaseDom,
+      children,
+      ...props
+    } = this.props;
 
     return (
       <text ref={this.domRef} {...props}>

@@ -4,12 +4,16 @@ import {SVG, Circle} from '../../core/ReactRough';
 
 const RadioButton = ({checked, toggleChecked}) => (
   <div style={{display: 'inline-block'}} onClick={toggleChecked}>
-    <SVG width={20} height={20}>
-      <Circle x={10} y={10} diameter={14} options={{
-        fill: checked ? '#ffc78f' : '#fff',
-        fillWeight: 3,
-        roughness: 0.5,
-      }}/>
+    <SVG width={28} height={28}>
+      <Circle x={12} y={12} diameter={20} />
+      {checked && (
+        <Circle
+          x={12}
+          y={12}
+          diameter={12}
+          options={{fill: 'black', fillStyle: 'solid'}}
+        />
+      )}
     </SVG>
   </div>
 );
