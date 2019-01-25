@@ -2,11 +2,11 @@ import React from 'react';
 import {compose, setDisplayName, withState, withHandlers} from 'recompose';
 import {SVG, Circle} from '../../core/ReactRough';
 
-const RadioButton = ({checked, toggleChecked}) => (
-  <div style={{display: 'inline-block'}} onClick={toggleChecked}>
+const RadioButton = ({active}) => (
+  <div style={{display: 'inline-block'}}>
     <SVG width={28} height={28}>
       <Circle x={12} y={12} diameter={20} />
-      {checked && (
+      {active && (
         <Circle
           x={12}
           y={12}
@@ -18,16 +18,4 @@ const RadioButton = ({checked, toggleChecked}) => (
   </div>
 );
 
-const enhance = compose(
-  setDisplayName('RadioButton'),
-  withState(
-    'checked',
-    'setChecked',
-    ({defaultChecked}) => defaultChecked || false,
-  ),
-  withHandlers({
-    toggleChecked: ({setChecked}) => () => setChecked(checked => !checked),
-  }),
-);
-
-export default enhance(RadioButton);
+export default RadioButton;
