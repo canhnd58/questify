@@ -89,6 +89,10 @@ class Text extends React.Component {
     roughCallback(this.domRef.current);
   }
 
+  componentWillUnmount() {
+    this.props.releaseDom(this.ref);
+  }
+
   getBBox() {
     return this.domRef.current.getBBox();
   }
