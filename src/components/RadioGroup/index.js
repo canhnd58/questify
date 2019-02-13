@@ -19,6 +19,9 @@ const RadioGroup = ({options = [], activeRadio, setActiveRadio, inline}) =>
     </Wrapper>
   ));
 
-const enhance = compose(withState('activeRadio', 'setActiveRadio', null));
+const enhance = compose(
+  withState('activeRadio', 'setActiveRadio', null),
+  React.memo,
+);
 
 export default enhance(RadioGroup);
