@@ -9,10 +9,10 @@ const Wrapper = styled.div`
   justify-content: space-between;
 `;
 
-const Navigator = () => (
+const Navigator = ({title}) => (
   <Wrapper>
     <TriangleButton direction="left">Quit</TriangleButton>
-    <span style={{textTransform: 'uppercase'}}>Create new charater</span>
+    <span style={{textTransform: 'uppercase'}}>{title}</span>
     <TriangleButton direction="right">Next</TriangleButton>
   </Wrapper>
 );

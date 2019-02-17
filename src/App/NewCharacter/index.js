@@ -12,7 +12,7 @@ const Wrapper = styled.div`
 
 const NewCharacter = () => (
   <Wrapper>
-    <Navigator />
+    <Navigator title="Create new character" />
     <div>This is the content</div>
   </Wrapper>
 );
