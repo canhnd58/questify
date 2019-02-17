@@ -13,7 +13,7 @@ const Wrapper = styled.div`
     position: absolute;
   }
 
-  & input[type=file] {
+  & input[type='file'] {
     position: absolute;
     display: block;
     top: 0;
@@ -21,7 +21,7 @@ const Wrapper = styled.div`
     opacity: 0;
     cursor: pointer;
   }
-`
+`;
 
 class ImageUploader extends React.Component {
   constructor(props) {
@@ -36,14 +36,14 @@ class ImageUploader extends React.Component {
     if (!e.target.files[0]) return;
 
     this.setState({
-      src: URL.createObjectURL(e.target.files[0])
+      src: URL.createObjectURL(e.target.files[0]),
     });
 
     if (this.props.handleChange) this.props.handleChange(e);
   }
 
   render() {
-    const {width, height} = this.props;
+    const {width, height, style} = this.props;
     const {src} = this.state;
     const padding = 3;
     const boxX = padding;
@@ -52,26 +52,35 @@ class ImageUploader extends React.Component {
     const boxH = height - 2 * padding;
 
     return (
-      <Wrapper style={{width, height}}>
-        {src &&
+      <Wrapper style={{width, height, ...style}}>
+        {src && (
           <img
             src={src}
-            width={width-2*padding}
-            height={height-2*padding}
+            width={width - 2 * padding}
+            height={height - 2 * padding}
             style={{
               top: padding,
-              left: padding
+              left: padding,
             }}
             alt=""
-          />}
+          />
+        )}
         <SVG width={width} height={height}>
           <Rectangle x={boxX} y={boxY} width={boxW} height={boxH} />
-          {!src && <Line x1={boxX} y1={boxY} x2={boxX+boxW} y2={boxY+boxH} />}
-          {!src && <Line x1={boxX+boxW} y1={boxY} x2={boxX} y2={boxY+boxH} />}
+          {!src && (
+            <Line x1={boxX} y1={boxY} x2={boxX + boxW} y2={boxY + boxH} />
+          )}
+          {!src && (
+            <Line x1={boxX + boxW} y1={boxY} x2={boxX} y2={boxY + boxH} />
+          )}
         </SVG>
-        <input type="file" style={{width, height}} onChange={this.handleChange}/>
+        <input
+          type="file"
+          style={{width, height}}
+          onChange={this.handleChange}
+        />
       </Wrapper>
-    )
+    );
   }
 }
 

@@ -3,7 +3,11 @@ import NewCharacter from './NewCharacter';
 
 class App extends Component {
   render() {
-    return <NewCharacter />;
+    return (
+      <div style={{height: '100vh'}}>
+        <NewCharacter />
+      </div>
+    );
   }
 }
 
