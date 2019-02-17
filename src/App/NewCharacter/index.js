@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import Navigator from '../Navigator';
+import HorizontalRule from '../../components/HorizontalRule';
 
 const Wrapper = styled.div`
   dipslay: flex;
@@ -13,6 +14,7 @@ const Wrapper = styled.div`
 const NewCharacter = () => (
   <Wrapper>
     <Navigator title="Create new character" />
+    <HorizontalRule />
     <div>This is the content</div>
   </Wrapper>
 );
