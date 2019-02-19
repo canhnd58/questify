@@ -22,8 +22,8 @@ const ClearedStyleInput = styled.input`
   font-size: 1em;
 `;
 
-const Input = props => (
-  <InputWrapper>
+const Input = ({style, ...props}) => (
+  <InputWrapper style={style}>
     <ClearedStyleInput {...props} />
     <SVG
       style={{

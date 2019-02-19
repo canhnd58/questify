@@ -3,8 +3,8 @@ import {compose, setDisplayName, withState, withHandlers} from 'recompose';
 
 import {Path, SVG} from '../../core/ReactRough';
 
-const Checkbox = ({checked, toggleChecked}) => (
-  <div style={{display: 'inline-block'}} onClick={toggleChecked}>
+const Checkbox = ({checked, toggleChecked, style}) => (
+  <div style={{display: 'inline-block', ...style}} onClick={toggleChecked}>
     <SVG width={28} height={28}>
       <Path
         d={
