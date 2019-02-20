@@ -13,7 +13,7 @@ import Checkbox from '../../components/Checkbox';
 const Wrapper = styled.div`
   dipslay: flex;
   flex-direction: column;
-  padding: 10px 20px;
+  padding: 20px 40px;
 `;
 
 const Row = styled.div`
